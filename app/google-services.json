@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "199126289324",
+    "project_id": "dnddungeongamev1",
+    "storage_bucket": "dnddungeongamev1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:199126289324:android:5d55195fe4ab3f148fc809",
+        "android_client_info": {
+          "package_name": "com.example.dnddungeongamev1"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBS5enqS3TbBBALmaWRsQBryDlGnvH9WCs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
