@@ -1,21 +1,23 @@
 package com.example.dnddungeongamev1.view;
 
 import android.content.Intent;
+import android.content.pm.PackageManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.dnddungeongamev1.R;
-import com.example.dnddungeongamev1.controller.GameEngine;
-import com.example.dnddungeongamev1.model.Levels;
-import com.example.dnddungeongamev1.model.database.Database;
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.analytics.FirebaseAnalytics;
 import com.google.firebase.auth.FirebaseAuth;
@@ -23,9 +25,13 @@ import com.google.firebase.auth.FirebaseUser;
 
 public class MainActivity extends AppCompatActivity {
 
+    private static final int REQUEST_ACTIVITY_RECOGNITION = 100;
     private FirebaseAuth auth;
     private EditText loginText;
     private EditText pwdText;
+
+    private FirebaseAnalytics analytics;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +42,15 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACTIVITY_RECOGNITION)
+                    != PackageManager.PERMISSION_GRANTED) {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{android.Manifest.permission.ACTIVITY_RECOGNITION},
+                        REQUEST_ACTIVITY_RECOGNITION);
+            }
+        }
 
 
 
@@ -50,9 +65,35 @@ public class MainActivity extends AppCompatActivity {
         Button loginBtn = findViewById(R.id.loginBtn);
         Button registerBtn = findViewById(R.id.registerBtn);
 
+
+        if (loginText == null) {
+            throw new NullPointerException("loginText is null. Check activity_main.xml for R.id.loginText.");
+        }
+        if (pwdText == null) {
+            throw new NullPointerException("pwdText is null. Check activity_main.xml for R.id.pwdText.");
+        }
+        if (loginBtn == null) {
+            throw new NullPointerException("loginBtn is null. Check activity_main.xml for R.id.loginBtn.");
+        }
+        if (registerBtn == null) {
+            throw new NullPointerException("registerBtn is null. Check activity_main.xml for R.id.registerBtn.");
+        }
+
         loginBtn.setOnClickListener(v -> login());
         registerBtn.setOnClickListener(v -> register());
 
+    }
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+
+        if (requestCode == REQUEST_ACTIVITY_RECOGNITION) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                Toast.makeText(this, "Permission Granted", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
     private void register()
     {

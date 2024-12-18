@@ -8,6 +8,18 @@
     android:layout_height="match_parent"
     tools:context=".view.MainActivity">
 
+    <Button
+        android:id="@+id/vidBtnOne2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.044" />
+
     <ImageView
         android:id="@+id/imageCycle"
         android:layout_width="500dp"
@@ -26,14 +38,13 @@
         android:id="@+id/moveBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
         android:text="@string/moveBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.754" />
+        app:layout_constraintVertical_bias="0.823" />
 
     <Button
         android:id="@+id/interactBtn"
@@ -42,10 +53,10 @@
         android:text="@string/interactBtn"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textView"
-        app:layout_constraintHorizontal_bias="0.333"
+        app:layout_constraintHorizontal_bias="0.611"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.754" />
+        app:layout_constraintVertical_bias="0.823" />
 
     <TextView
         android:id="@+id/textView"
@@ -56,16 +67,44 @@
         android:text="@string/textDisplay"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageCycle"
         app:layout_constraintVertical_bias="0.0" />
 
     <TextView
-        android:id="@+id/stepCounter"
+        android:id="@+id/stepCountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Steps: "
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="16dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.023"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.04" />
+
+    <Button
+        android:id="@+id/mapBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Map"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.018"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.134" />
+
+    <Button
+        android:id="@+id/vidBtnTwo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Video"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.975"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.176" />
 </androidx.constraintlayout.widget.ConstraintLayout>

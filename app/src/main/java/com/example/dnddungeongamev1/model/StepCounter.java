@@ -1,65 +1,83 @@
 package com.example.dnddungeongamev1.model;
 
+
 import android.content.Context;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
 import android.hardware.SensorManager;
-import android.widget.TextView;
+import android.util.Log;
 
-import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.dnddungeongamev1.R;
-
-public class StepCounter extends AppCompatActivity implements SensorEventListener {
+public class StepCounter implements SensorEventListener
+{
     private SensorManager sensorManager;
     private Sensor stepCounterSensor;
-    private TextView countView;
-    private int stepCount = 0;
+    private StepListener listener;
 
-    public StepCounter()
+    private int stepsSinceStart;
+
+    private int initialStepCount = -1;
+
+
+    public interface StepListener
     {
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-
-        countView = findViewById(R.id.stepCounter);
-
-        sensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        if(sensorManager != null)
-        {
-            stepCounterSensor = sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER);
-            if(stepCounterSensor == null)
-            {
-                countView.setText("No Step Counter Sensor");
-            }
-        }
+        void onStepCountChanged(int stepCount);
+        void onNoStepCounter();
     }
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if (stepCounterSensor != null) {
+    public StepCounter(Context context) {
+        sensorManager = (SensorManager) context.getSystemService(Context.SENSOR_SERVICE);
+        stepCounterSensor = sensorManager != null ? sensorManager.getDefaultSensor(Sensor.TYPE_STEP_COUNTER) : null;
+    }
+
+    public void setStepListener(StepListener listener) {
+        this.listener = listener;
+    }
+
+    public void start() {
+        if (sensorManager != null && stepCounterSensor != null) {
             sensorManager.registerListener(this, stepCounterSensor, SensorManager.SENSOR_DELAY_UI);
+        } else if (listener != null) {
+            listener.onNoStepCounter();
         }
     }
 
-    @Override
-    protected void onPause() {
-        super.onPause();
-        if (stepCounterSensor != null) {
+    public void stop() {
+        if (sensorManager != null) {
             sensorManager.unregisterListener(this);
         }
     }
 
+//    @Override
+//    public void onSensorChanged(SensorEvent event) {
+//        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
+//            Log.d("StepCounter", "Sensor changed: " + event.values[0]);
+//            if (listener != null) {
+//                listener.onStepCountChanged((int) event.values[0]);
+//            }
+//        }
+//    }
     @Override
     public void onSensorChanged(SensorEvent event) {
-        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER) {
-            // Use the event values[0] for the total step count
-            stepCount = (int) event.values[0];
-            countView.setText("Steps: " + stepCount);
+        if (event.sensor.getType() == Sensor.TYPE_STEP_COUNTER && listener != null) {
+            int totalSteps = (int) event.values[0];
+
+            if (initialStepCount == -1) {
+                initialStepCount = totalSteps;
+            }
+
+            int stepsSinceStart = totalSteps - initialStepCount;
+
+            listener.onStepCountChanged(stepsSinceStart);
         }
     }
-
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
-        // Optional: Handle accuracy changes if needed
+
+    }
+
+    public int getStepsSinceStart()
+    {
+        return stepsSinceStart;
     }
 }

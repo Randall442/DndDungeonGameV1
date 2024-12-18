@@ -1,14 +1,20 @@
 <resources>
     <string name="app_name">DndDungeonGameV1</string>
+    <string name="loginText">Username</string>
+    <string name="pwdText">Password</string>
     <string name="loginBtn">Login</string>
     <string name="registerBtn">Register</string>
     <string name="exitBtn">Exit</string>
 
 
-    <string name="userText">Login</string>
-    <string name="pwdText">Password</string>
-
     <string name="interactBtn">Interact</string>
     <string name="moveBtn">Move</string>
-    <string name="textDisplay">towering spires silhouetted against a moonlit sky, intricate stonework details casting eerie shadows, surrounded by a thick, ominous fog, hint of flickering torches emitting a ghostly glow, foreboding atmosphere, gothic architecture, ancient trees clawing at the fortress, low-hanging clouds adding to the mysterious vibe, ultra-detailed, cinematic composition.</string>
+    <string name="textDisplay">towering spires silhouetted against a moonlit sky,
+        intricate stonework details casting eerie shadows, surrounded by a thick,
+        ominous fog, hint of flickering torches emitting a ghostly glow, foreboding atmosphere, goth
+        ic architecture, ancient trees clawing at the fortress, low-hanging clouds adding to the
+        mysterious vibe, ultra-detailed, cinematic composition.</string>
+    <string name="step_count">Steps: %1$d</string>
+    <string name="no_step_counter">No step counter available</string>
+    <string name="title_activity_maps">MapsActivity</string>"
 </resources>
