@@ -19,7 +19,7 @@ public class Items {
         this.itemId = itemId;
     }
 
-    public String getItemName() {
+    public String getName() {
         return itemName;
     }
 
